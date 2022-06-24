@@ -166,6 +166,7 @@ public class FrameCancion extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        jLabel2.setText("Reproduciendo cancion: "+jt_cancion.convertValueToText(ab, rootPaneCheckingEnabled, rootPaneCheckingEnabled, rootPaneCheckingEnabled, ERROR, rootPaneCheckingEnabled));
         
     }//GEN-LAST:event_jButton3ActionPerformed
 

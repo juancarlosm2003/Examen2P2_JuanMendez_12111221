@@ -47,7 +47,7 @@ public class Guardar implements Runnable {
     public void run() {         
         while(true){            
             try {
-                File f=new File("./bitacora.txt");
+                File f=new File(".txt");
                 FileWriter fw=new FileWriter(f,true);
                 BufferedWriter bw=new BufferedWriter(fw);
                 bw.write(hora.getText()+"  "+barra.getValue());
