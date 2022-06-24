@@ -20,6 +20,14 @@ public class FrameCancion extends javax.swing.JFrame {
      */
     public FrameCancion() {
         initComponents();
+        Guardar2 h = new Guardar2(jLabel3);
+        Thread proceso1 = new Thread(h);
+        proceso1.start();
+
+        ab = new Administrar(jProgressBar1);
+        Guardar g = new Guardar(this.jProgressBar1, jLabel3);
+        Thread proceso2 = new Thread(g);
+        proceso2.start();
     }
 
     /**
@@ -87,6 +95,11 @@ public class FrameCancion extends javax.swing.JFrame {
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, 160, 40));
 
         jButton4.setText("Pausar Cancion");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 120, 40));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -133,16 +146,16 @@ public class FrameCancion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-        HiloHora h=new HiloHora(jl_hora);
-        Thread proceso1 = new Thread(h);
-        proceso1.start();
-
-        ab = new Administrar(jProgressBar1);
-        Guardar g = new Guardar(this.jProgressBar1, jLabel3);
-        Thread proceso2 = new Thread(g);
-        proceso2.start();
+        // TODO add your handling code here:;
+        jLabel2.setText("Grabando");
+        ab.start();
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        ab.setAvanzar(false);
+
+    }//GEN-LAST:event_jButton4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -193,4 +206,5 @@ public class FrameCancion extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTree jt_cancion;
     // End of variables declaration//GEN-END:variables
+Administrar ab;
 }

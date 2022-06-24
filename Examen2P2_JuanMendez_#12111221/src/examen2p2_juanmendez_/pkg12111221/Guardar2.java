@@ -20,20 +20,20 @@ public class Guardar2 implements Runnable {
 
     public Guardar2(JLabel hora) {
         this.hora = hora;
-    }
+    }        
 
     @Override
     public void run() {
-        while (true) {
-            Date h = new Date();
-            DateFormat f = new SimpleDateFormat("hh:mm:ss");
-            hora.setText(f.format(h));
+        while(true){
+            Date h=new Date();
+            DateFormat f=new SimpleDateFormat("hh:mm:ss");
+            hora.setText( f.format(h) );
             try {
                 Thread.sleep(50);
             } catch (InterruptedException ex) {
-
+                
             }
-        }
+        }        
     }
 
 }

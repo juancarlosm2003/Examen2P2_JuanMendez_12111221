@@ -13,15 +13,18 @@ import javax.swing.JProgressBar;
  */
 public class Administrar extends Thread {
 
-    private JProgressBar barra;
+      private JProgressBar barra;
     private boolean avanzar;
     private boolean vive;
 
     public Administrar(JProgressBar barra) {
         this.barra = barra;
-        avanzar = true;
-        vive = true;
+        avanzar=true;
+        vive=true;
     }
+    
+    
+    
 
     public boolean isVive() {
         return vive;
@@ -31,6 +34,7 @@ public class Administrar extends Thread {
         this.vive = vive;
     }
 
+
     public boolean isAvanzar() {
         return avanzar;
     }
@@ -39,6 +43,7 @@ public class Administrar extends Thread {
         this.avanzar = avanzar;
     }
 
+
     public JProgressBar getBarra() {
         return barra;
     }
@@ -46,17 +51,17 @@ public class Administrar extends Thread {
     public void setBarra(JProgressBar barra) {
         this.barra = barra;
     }
-
+    
     @Override
-    public void run() {
-        while (vive) {
-            if (avanzar) {
-                barra.setValue(barra.getValue() + 1);
-                if (barra.getValue() == 100000000) {
-                    vive = false;
-                }
+    public void run(){
+        while(vive){
+            if(avanzar){
+                barra.setValue(barra.getValue()+1);
+                if(barra.getValue()==100000000){
+                    vive=false;
+                }                
             } //FIN IF
-
+            
             try {
                 Thread.sleep(0);
             } catch (InterruptedException ex) {
