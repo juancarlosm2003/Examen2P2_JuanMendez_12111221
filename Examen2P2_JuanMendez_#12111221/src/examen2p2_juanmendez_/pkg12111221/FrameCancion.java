@@ -5,6 +5,7 @@
  */
 package examen2p2_juanmendez_.pkg12111221;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -92,6 +93,11 @@ public class FrameCancion extends javax.swing.JFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 140, 40));
 
         jButton3.setText("Reproducir Cancion");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, 160, 40));
 
         jButton4.setText("Pausar Cancion");
@@ -142,7 +148,7 @@ public class FrameCancion extends javax.swing.JFrame {
             nodo.add(new DefaultMutableTreeNode(categoria));
             root.add(nodo);
         }
-        modelo.reload();
+        xd.add(jTextArea1.getName());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -156,6 +162,10 @@ public class FrameCancion extends javax.swing.JFrame {
         ab.setAvanzar(false);
 
     }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,4 +217,5 @@ public class FrameCancion extends javax.swing.JFrame {
     private javax.swing.JTree jt_cancion;
     // End of variables declaration//GEN-END:variables
 Administrar ab;
+ArrayList<String> xd = new ArrayList();
 }
