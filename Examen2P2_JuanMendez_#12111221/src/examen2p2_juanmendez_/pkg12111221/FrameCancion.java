@@ -5,6 +5,10 @@
  */
 package examen2p2_juanmendez_.pkg12111221;
 
+import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+
 /**
  *
  * @author Juan Carlos Mendez
@@ -28,7 +32,7 @@ public class FrameCancion extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jt_cancion = new javax.swing.JTree();
         jProgressBar1 = new javax.swing.JProgressBar();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -38,13 +42,16 @@ public class FrameCancion extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jt_cancion.setBackground(new java.awt.Color(0, 51, 204));
+        jt_cancion.setForeground(new java.awt.Color(0, 102, 204));
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Canciones");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane1.setViewportView(jTree1);
+        jt_cancion.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(jt_cancion);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 142, 150, 290));
         getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 780, 80));
@@ -56,9 +63,24 @@ public class FrameCancion extends javax.swing.JFrame {
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 590, 210));
 
         jButton1.setText("Grabar cancion");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 130, 40));
 
         jButton2.setText("Guardar Cancion");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 140, 40));
 
         jButton3.setText("Reproducir Cancion");
@@ -67,14 +89,60 @@ public class FrameCancion extends javax.swing.JFrame {
         jButton4.setText("Pausar Cancion");
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 120, 40));
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("_");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/7123.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 430));
 
+        jLabel3.setText("00:00:00");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String nombre = JOptionPane.showInputDialog("Ingrese el nombre de la cancion");
+        String categoria = JOptionPane.showInputDialog("Ingrese la categoria de la cancion");
+        DefaultTreeModel modelo = (DefaultTreeModel) jt_cancion.getModel();
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) modelo.getRoot();
+        int aux = -1;
+
+        for (int i = 0; i < root.getChildCount(); i++) {
+            if (root.getChildAt(i).toString().equals(nombre)) {
+                aux = i;
+                break;
+            }
+        }
+        if (aux > -1) {
+            DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) root.getChildAt(aux);
+            nodo.add(new DefaultMutableTreeNode(categoria));
+        } else {
+            DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(nombre);
+            nodo.add(new DefaultMutableTreeNode(categoria));
+            root.add(nodo);
+        }
+        modelo.reload();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        HiloHora h=new HiloHora(jl_hora);
+        Thread proceso1 = new Thread(h);
+        proceso1.start();
+
+        ab = new Administrar(jProgressBar1);
+        Guardar g = new Guardar(this.jProgressBar1, jLabel3);
+        Thread proceso2 = new Thread(g);
+        proceso2.start();
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -118,10 +186,11 @@ public class FrameCancion extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JTree jt_cancion;
     // End of variables declaration//GEN-END:variables
 }
