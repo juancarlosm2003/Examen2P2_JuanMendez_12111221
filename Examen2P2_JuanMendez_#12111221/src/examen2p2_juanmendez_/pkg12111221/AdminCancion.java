@@ -46,15 +46,16 @@ public class AdminCancion {
     public String toString() {
         return "AdminCancion{" + "listacancion=" + listacancion + '}';
     }
-     public void cargarArchivo() {
-        try {            
+
+    public void cargarArchivo() {
+        try {
             listacancion = new ArrayList();
             Cancion temp;
             if (archivo.exists()) {
                 FileInputStream entrada
-                    = new FileInputStream(archivo);
+                        = new FileInputStream(archivo);
                 ObjectInputStream objeto
-                    = new ObjectInputStream(entrada);
+                        = new ObjectInputStream(entrada);
                 try {
                     while ((temp = (Cancion) objeto.readObject()) != null) {
                         listacancion.add(temp);
@@ -63,7 +64,7 @@ public class AdminCancion {
                 }
                 objeto.close();
                 entrada.close();
-            }            
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
